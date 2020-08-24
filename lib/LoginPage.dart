@@ -11,14 +11,15 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
 
   String _email = "";
-  String password = "";
+  String _password = "";
 
   void validateAndSave() {
     final form = formKey.currentState;
 
     try {
       if (form.validate()) {
-        print('Form is valid');
+        form.save();
+        print('Email : $_email,password : $_password');
       } else {
         print('Form is invalid');
       }
@@ -49,12 +50,14 @@ class _LoginPageState extends State<LoginPage> {
                             new InputDecoration(labelText: 'Enter email'),
                         validator: (value) =>
                             value.isEmpty ? 'Email  can\t be empty' : null,
+                        onSaved: (value) => _email = value,
                       ),
                       new TextFormField(
                         decoration:
                             new InputDecoration(labelText: 'Enter password'),
                         validator: (value) =>
                             value.isEmpty ? 'Password can\t be empty' : null,
+                        onSaved: (value) => _password = value,
                         obscureText: true,
                       ),
                       SizedBox(
